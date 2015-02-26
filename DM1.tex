@@ -1,0 +1,75 @@
+\input{src/macros.tex}
+
+\title{Calcul formel}
+\author{
+    Marc \textsc{Chevalier}
+}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\section*{Produit court de polynômes}
+
+\subsection*{Question 1}
+
+On a $M\left(\frac{n}{2}\right) = C_\alpha n^\alpha$ avec $\alpha>1$.
+
+La formule de récurrence est 
+
+\[
+    S(n) = 2S\left(\frac{n}{2}\right) + M\left(\frac{n}{2}\right)
+\]
+
+ie 
+
+\[
+    S(n) = 2S\left(\frac{n}{2}\right) + \frac{C_\alpha}{2^\alpha}n^\alpha
+\]
+
+En déroulant la récurrence:
+\[
+    S(n)=\frac{C_\alpha n^\alpha(2^{((\alpha-1)\log_2(n))}-1)2^{(\alpha-1)}}{2^\alpha(2^{(\alpha-1)}-1)2^{((\alpha-1)\log_2(n))}}
+\]
+soit
+\[
+    S(n) = \frac{C_\alpha(n^\alpha-n)}{2^\alpha-2}
+\]
+
+On a donc $S(n) = \Theta(n^\alpha)$. Ce qui n'est pas tout à fait assez fin mais qui montre que l'approche récursive ne sera pas nettement plus efficace que le calcul brutal.
+
+\begin{enumerate}
+    \item Dans le cas du produit avec l'algorithme naïf, on a $\alpha = 2$. Soit, dans notre cas
+\[
+    \begin{aligned}
+        S(n) &= \frac{C_\alpha(n^2-n)}{2}\\
+        &= \frac{C_\alpha n^2}{2} - \frac{C_\alpha n}{2}\\
+        &= \frac{M(n)}{2} - \frac{C_\alpha n}{2}
+    \end{aligned}
+\]
+    On a donc une légère amélioration par rapport à l'algorithme naïf.
+    
+    \item Dans le cas du produit avec l'algorithme de \textsc{Karatsuba}, on a $\alpha = \log_2(3)$. Soit, dans notre cas
+\[
+    \begin{aligned}
+        S(n) &= \frac{C_\alpha(n^{\log_2(3)}-n)}{2^{\log_2(3)}-2}\\
+        &= \frac{C_\alpha(n^{\log_2(3)}-n)}{3-2}\\
+        &= C_\alpha n^{\log_2(3)}-C_\alpha n\\
+        &= M(n) -C_\alpha n
+    \end{aligned}
+\]
+    On a donc une encore plus légère amélioration par rapport à l'algorithme de \textsc{Karatsuba}.
+\end{enumerate}
+
+\subsection*{Question 2}
+
+En déroulant la récurrence, on trouve, puisque $M(kn) = k^\alpha M(n)$
+
+\[
+    S(n) = M(n) \beta^\alpha \frac{1-(2(1-\beta)^\alpha)^{\log_{1-\frac{1}{\beta}} (n)}}{1-2(1-\beta)^\alpha}
+\]
+
+On peut donc prendre $C_\beta = \beta^\alpha \frac{1-(2(1-\beta)^\alpha)}{1-2(1-\beta)^\alpha}$.
+
+\end{document}
+
