@@ -66,10 +66,32 @@ On a donc $S(n) = \Theta(n^\alpha)$. Ce qui n'est pas tout à fait assez fin mai
 En déroulant la récurrence, on trouve, puisque $M(kn) = k^\alpha M(n)$
 
 \[
-    S(n) = M(n) \beta^\alpha \frac{1-(2(1-\beta)^\alpha)^{\log_{1-\frac{1}{\beta}} (n)}}{1-2(1-\beta)^\alpha}
+    S(n) = M(n) \beta^\alpha \frac{1-(2(1-\beta)^\alpha)^{\log_{\frac{\beta - 1}{\beta}} (n)}}{1-2(1-\beta)^\alpha}
 \]
 
-On peut donc prendre $C_\beta = \beta^\alpha \frac{1-(2(1-\beta)^\alpha)}{1-2(1-\beta)^\alpha}$.
+On peut donc prendre $C_\beta = \frac{\beta^\alpha}{1-(2(1-\beta))^\alpha}$.
 
+\subsection*{Question 3}
+
+Il faut trouver le $\beta$ qui minimise $C_\beta$ en fonction de $\alpha$.
+
+Pour se faire, il faut trouver $\beta$ qui annule $\frac{\partial C_\beta}{\partial \beta}$.
+
+On a 
+\[
+    \frac{\partial C_\beta}{\partial \beta} =  \frac{\beta^\alpha \alpha}{\beta(1-2(1-\beta)^\alpha)}-\frac{2\beta^\alpha(1-\beta)^\alpha \alpha}{((1-2(1-\beta)^\alpha)^2(1-\beta)}
+\]
+et
+\[
+    \frac{\partial C_\beta}{\partial \beta} = 0 \Leftrightarrow \beta = -e^{-\frac{\ln(2)}{\alpha-1}} +1
+\]
+
+\bigskip
+
+Pour $\alpha =2$, on a $\beta = \frac{1}{2}$ et $C_\beta = \frac{1}{2}$. Comme dans la question 1...
+
+Pour $\alpha = \log_2(3)$, on a $\beta = -e^{-\frac{\ln(2)}{\frac{\ln(3)}{\ln(2)}-1}}+1\approx 0.69$ et $C_\beta = \frac{\left ( -e^{-\frac{\ln(2)}{\frac{\ln(3)}{\ln(2)}-1}}+1\right)^{\frac{\ln(3)}{\ln(2)}}}{1-2\left ( -e^{-\frac{\ln(2)}{\frac{\ln(3)}{\ln(2)}-1}}\right)^{\frac{\ln(3)}{\ln(2)}}}\approx 0.81$.
+
+Ici, on a une amélioration sensible par rapport à la question 1.
 \end{document}
 
