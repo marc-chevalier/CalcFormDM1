@@ -43,8 +43,8 @@ On a donc $S(n) = \Theta(n^\alpha)$. Ce qui n'est pas tout à fait assez fin mai
 \[
     \begin{aligned}
         S(n) &= \frac{C_\alpha(n^2-n)}{2}\\
-        &= \frac{C_\alpha n^2}{2} - \frac{C_\alpha n}{2}\\
-        &= \frac{M(n)}{2} - \frac{C_\alpha n}{2}
+        &= \frac{C_2 n^2}{2} - \frac{C_2 n}{2}\\
+        &= \frac{M(n)}{2} - \frac{C_2 n}{2}
     \end{aligned}
 \]
     On a donc une légère amélioration par rapport à l'algorithme naïf.
@@ -52,10 +52,10 @@ On a donc $S(n) = \Theta(n^\alpha)$. Ce qui n'est pas tout à fait assez fin mai
     \item Dans le cas du produit avec l'algorithme de \textsc{Karatsuba}, on a $\alpha = \log_2(3)$. Soit, dans notre cas
 \[
     \begin{aligned}
-        S(n) &= \frac{C_\alpha(n^{\log_2(3)}-n)}{2^{\log_2(3)}-2}\\
-        &= \frac{C_\alpha(n^{\log_2(3)}-n)}{3-2}\\
-        &= C_\alpha n^{\log_2(3)}-C_\alpha n\\
-        &= M(n) -C_\alpha n
+        S(n) &= \frac{C_{\log_2(3)}(n^{\log_2(3)}-n)}{2^{\log_2(3)}-2}\\
+        &= \frac{C_{\log_2(3)}(n^{\log_2(3)}-n)}{3-2}\\
+        &= C_{\log_2(3)}n^{\log_2(3)}-C_{\log_2(3)}n\\
+        &= M(n) -C_{\log_2(3)} n
     \end{aligned}
 \]
     On a donc une encore plus légère amélioration par rapport à l'algorithme de \textsc{Karatsuba}.
@@ -93,5 +93,32 @@ Pour $\alpha =2$, on a $\beta = \frac{1}{2}$ et $C_\beta = \frac{1}{2}$. Comme d
 Pour $\alpha = \log_2(3)$, on a $\beta = -e^{-\frac{\ln(2)}{\frac{\ln(3)}{\ln(2)}-1}}+1\approx 0.69$ et $C_\beta = \frac{\left ( -e^{-\frac{\ln(2)}{\frac{\ln(3)}{\ln(2)}-1}}+1\right)^{\frac{\ln(3)}{\ln(2)}}}{1-2\left ( -e^{-\frac{\ln(2)}{\frac{\ln(3)}{\ln(2)}-1}}\right)^{\frac{\ln(3)}{\ln(2)}}}\approx 0.81$.
 
 Ici, on a une amélioration sensible par rapport à la question 1.
+
+\subsection*{Question 4}
+
+Le produit naïf est plus rapide que l'algorithme de \textsc{Karatsuba} tant que
+\[
+    C_2 n^2 < C_{\log_2(3)} n^{\log_2(3)}
+\]
+soit 
+\[
+    n^{2-\log_2(3)} < \frac{C_{\log_2(3)}}{C_2}
+\]
+ie
+\[
+    n < \sqrt[2-\log_2(3)]{\frac{C_{\log_2(3)}}{C_2}} \approx \sqrt[0.42]{\frac{C_{\log_2(3)}}{C_2}}
+\]
+
+De même avec le produit court
+\[
+    \frac{1}{2}C_2n^2 < \frac{\left ( -e^{-\frac{\ln(2)}{\frac{\ln(3)}{\ln(2)}-1}}+1\right)^{\frac{\ln(3)}{\ln(2)}}}{1-2\left ( -e^{-\frac{\ln(2)}{\frac{\ln(3)}{\ln(2)}-1}}\right)^{\frac{\ln(3)}{\ln(2)}}} C_{\log_2(3)}n^{\log_2(3)}
+\]
+soit
+\[
+    n < \sqrt[0.42]{2\frac{\left ( -e^{-\frac{\ln(2)}{\frac{\ln(3)}{\ln(2)}-1}}+1\right)^{\frac{\ln(3)}{\ln(2)}}}{1-2\left ( -e^{-\frac{\ln(2)}{\frac{\ln(3)}{\ln(2)}-1}}\right)^{\frac{\ln(3)}{\ln(2)}}}} \sqrt[0.42]{\frac{C_{\log_2(3)}}{C_2}} \approx 3.13 \sqrt[0.42]{\frac{C_{\log_2(3)}}{C_2}}
+\]
+
+Ce seuil est donc 3.13 fois supérieur dans le cas du produit court.
+
 \end{document}
 
