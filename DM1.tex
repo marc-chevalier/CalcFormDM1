@@ -66,7 +66,7 @@ On a donc $S(n) = \Theta(n^\alpha)$. Ce qui n'est pas tout à fait assez fin mai
 En déroulant la récurrence, on trouve, puisque $M(kn) = k^\alpha M(n)$
 
 \[
-    S(n) = M(n) \beta^\alpha \frac{1-(2(1-\beta)^\alpha)^{\log_{\frac{\beta - 1}{\beta}} (n)}}{1-2(1-\beta)^\alpha}
+    S(n) = M(n) \beta^\alpha \frac{1-(2(1-\beta)^\alpha)^{\log_{\frac{1}{1-\beta}} (n)}}{1-2(1-\beta)^\alpha}
 \]
 
 On peut donc prendre $C_\beta = \frac{\beta^\alpha}{1-(2(1-\beta))^\alpha}$.
@@ -79,7 +79,7 @@ Pour se faire, il faut trouver $\beta$ qui annule $\frac{\partial C_\beta}{\part
 
 On a 
 \[
-    \frac{\partial C_\beta}{\partial \beta} =  \frac{\beta^\alpha \alpha}{\beta(1-2(1-\beta)^\alpha)}-\frac{2\beta^\alpha(1-\beta)^\alpha \alpha}{((1-2(1-\beta)^\alpha)^2(1-\beta)}
+    \frac{\partial C_\beta}{\partial \beta} =  \frac{\beta^\alpha \alpha}{\beta(1-2(1-\beta)^\alpha)}-\frac{2\beta^\alpha(1-\beta)^\alpha \alpha}{(1-2(1-\beta)^\alpha)^2(1-\beta)}
 \]
 et
 \[
